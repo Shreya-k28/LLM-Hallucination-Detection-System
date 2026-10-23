@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Lato", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #f5f2eb;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #f5f2eb;
+  color: #0a0a0a;
+  min-height: 100vh;
+}
+
+/* ── Editorial grid lines ── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(10,10,10,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,10,10,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Noise texture overlay ── */
+.noise::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  z-index: 9999;
+}
+
+/* ── Score bars ── */
+.score-bar-fill {
+  transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Typewriter cursor ── */
+.cursor::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Scan line animation for the detector box ── */
+@keyframes scanline {
+  0% { top: 0%; opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { top: 100%; opacity: 0; }
+}
+.scanline {
+  animation: scanline 2.2s linear infinite;
+}
+
+/* ── Stagger entrance ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Shimmer loading ── */
+.shimmer {
+  background: linear-gradient(90deg,
+    rgba(200,169,110,0) 0%,
+    rgba(200,169,110,0.25) 50%,
+    rgba(200,169,110,0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Dividers ── */
+.rule {
+  border: none;
+  border-top: 1px solid rgba(10,10,10,0.15);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(10,10,10,0.2); border-radius: 3px; }
+
+/* ── Focus rings ── */
+textarea:focus, button:focus {
+  outline: 2px solid #c8a96e;
+  outline-offset: 2px;
+}

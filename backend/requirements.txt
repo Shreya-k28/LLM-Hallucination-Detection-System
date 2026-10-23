@@ -1,0 +1,31 @@
+# HalluciCheck — Free Edition
+# Zero paid APIs. All models run locally.
+
+# ── Web framework ──────────────────────────────────────────────────
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.1
+
+# ── Local LLM (Flan-T5) ───────────────────────────────────────────
+transformers==4.41.1
+torch==2.3.0                  # CPU build — no GPU needed
+sentencepiece==0.2.0          # required tokenizer for T5 models
+protobuf==4.25.3              # required by sentencepiece
+
+# ── Embeddings + similarity ────────────────────────────────────────
+sentence-transformers==2.7.0
+
+# ── NLI entailment ────────────────────────────────────────────────
+# (uses transformers above — no extra package needed)
+
+# ── Vector search ─────────────────────────────────────────────────
+faiss-cpu==1.8.0
+numpy==1.26.4
+
+# ── ML classifier training ────────────────────────────────────────
+scikit-learn==1.5.0
+datasets==2.19.1              # downloads TruthfulQA from Hugging Face
+huggingface-hub>=0.23.0
+
+# ── Utilities ─────────────────────────────────────────────────────
+python-dotenv==1.0.1          # still useful for any future config
